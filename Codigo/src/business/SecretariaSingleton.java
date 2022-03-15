@@ -1,8 +1,11 @@
 package business;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import dao.CursoDAO;
 import exception.SecretariaException;
 
 public class SecretariaSingleton {
@@ -10,11 +13,19 @@ public class SecretariaSingleton {
 	private List<Curso> cursos;
 	private static final SecretariaSingleton INSTANCIA = new SecretariaSingleton();
 	
+	private SecretariaSingleton() {
+		professores = new ArrayList<Professor>();
+		cursos = new ArrayList<Curso>();
+	}
+	
 	public static SecretariaSingleton getInstancia() {
 		return INSTANCIA;
 	}
 	
-	public void gerarCurriculo(Disciplina disciplina) {};
+	public void gerarCurriculo(Curso curso) throws IOException {
+		CursoDAO file = new CursoDAO("curriculo.bin");
+		file.add(curso);
+	};
 	
 	public void matricularAluno(Aluno aluno, Curso curso) throws SecretariaException {
 		if (aluno != null && curso != null) {
@@ -106,7 +117,7 @@ public class SecretariaSingleton {
 		
 		return disciplina;
 		};
-	
+
 	public void manusearMatriculaGeral(Curso curso, boolean abrir) throws SecretariaException {
 		if (abrir == true)
 			cursos.stream().filter(current_curso -> current_curso.equals(curso)).forEach(current_curso -> curso.getTurmas().forEach(turma -> turma.abrirMatricula(abrir)));

@@ -11,6 +11,12 @@ public class Curso {
 	private List<Turma> turmas;
 	private int cargaHoraria;
 	
+	public Curso() {
+		disciplinas = new ArrayList<Disciplina>();
+		alunos = new ArrayList<Aluno>();
+		turmas = new ArrayList<Turma>();
+	}
+	
 	public void calcularCargaHoraria() {}
 
 	public String getNome() {
@@ -54,7 +60,7 @@ public class Curso {
 	}
 
 	public void addAluno(Aluno aluno) {
-		
+		alunos.add(aluno);
 	}
 
 	public Object addDisciplina(Disciplina disciplina) {

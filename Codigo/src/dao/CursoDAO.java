@@ -10,12 +10,14 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAO implements IDAO {
+import business.Curso;
+
+public class CursoDAO implements IDAO<Curso> {
 	private File file;
 	private FileOutputStream fos;
 	private ObjectOutputStream outputFile;
 
-	public DAO(String nomeArquivo) throws IOException {
+	public CursoDAO(String nomeArquivo) throws IOException {
 		file = new File(nomeArquivo);
 		fos = new FileOutputStream(file, true);
 		outputFile = new ObjectOutputStream(fos);
@@ -23,9 +25,9 @@ public class DAO implements IDAO {
 	}
 
 	@Override
-	public void add(Pedido p) {
+	public void add(Curso c) {
 		try {
-			outputFile.writeObject(p);
+			outputFile.writeObject(c);
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
 		}
@@ -33,43 +35,42 @@ public class DAO implements IDAO {
 	}
 
 	@Override
-	public void update(Pedido p) {
-		List<Pedido> list = getAll();
-		int pos = list.indexOf(p);
+	public void update(Curso c) {
+		List<Curso> list = getAll();
+		int pos = list.indexOf(c);
 		if (pos != -1)
-			list.set(pos, p);
+			list.set(pos, c);
 		saveAll(list);
 	}
 
 	@Override
-	public void delete(Pedido p) {
-		List<Pedido> list = getAll();
-		//list = list.stream().filter(pedido -> !pedido.equals(p)).toList();
+	public void delete(Curso c) {
+		List<Curso> list = getAll();
 		saveAll(list);
 
 	}
 
 	@Override
-	public Pedido get(Pedido p) {
-		Pedido resPedido = null;
-		List<Pedido> list = getAll();
-		for (Pedido pedido : list) {
-			if (p.equals(pedido)) {
-				resPedido = pedido;
+	public Curso get(Curso c) {
+		Curso resPedido = null;
+		List<Curso> list = getAll();
+		for (Curso sec : list) {
+			if (c.equals(sec)) {
+				resPedido = sec;
 			}
 		}
 		return resPedido;
 	}
 
 	@Override
-	public List<Pedido> getAll() {
-		List<Pedido> list = new ArrayList<>();
+	public List<Curso> getAll() {
+		List<Curso> list = new ArrayList<>();
 		try (ObjectInputStream inputFile = new ObjectInputStream(new FileInputStream(file))) {
-			Pedido p;
-			p = (Pedido) inputFile.readObject();
-			while (p != null) {
-				list.add(p);
-				p = (Pedido) inputFile.readObject();
+			Curso c;
+			c = (Curso) inputFile.readObject();
+			while (c != null) {
+				list.add(c);
+				c = (Curso) inputFile.readObject();
 			}
 
 		} catch (EOFException e) {
@@ -81,7 +82,7 @@ public class DAO implements IDAO {
 		return list;
 	}
 
-	private void saveAll(List<Pedido> list) {
+	private void saveAll(List<Curso> list) {
 
 		try {
 			close();
@@ -89,8 +90,8 @@ public class DAO implements IDAO {
 			fos = new FileOutputStream(file, true);
 			outputFile = new ObjectOutputStream(fos);
 
-			for (Pedido pedido : list) {
-				outputFile.writeObject(pedido);
+			for (Curso c : list) {
+				outputFile.writeObject(c);
 			}
 		} catch (IOException e) {
 			e.printStackTrace(System.err);
