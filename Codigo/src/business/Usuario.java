@@ -6,10 +6,25 @@ public abstract class Usuario {
 	private int cod_pessoa;
 	private String senha;
 	private String cpf;
+		
+	public Usuario(String nome, String email, String senha, int cod_pessoa, String cpf) {
+		this.setNome(nome);
+		this.setEmail(email);
+		this.setSenha(senha);
+		this.setCod_pessoa(cod_pessoa);
+		this.setCpf(cpf);
+	}
 	
-	public void fazerLogin(String email, String senha) {};
+	public void fazerLogin(String email, String senha) {
+		this.email.equals(email);
+		this.senha.equals(senha);
+	};
 	
-	public void recuperarSenha(String email) {}
+	public void recuperarSenha(String email, String novaSenha) {
+		if(this.email.equals(email)) {
+			this.setSenha(novaSenha);
+		}
+	}
 
 	public String getNome() {
 		return nome;
