@@ -1,5 +1,6 @@
 package business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Curso {
@@ -32,7 +33,7 @@ public class Curso {
 	}
 
 	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
+		this.disciplinas = new ArrayList<Disciplina>();
 	}
 
 	public int getCargaHoraria() {
@@ -40,7 +41,7 @@ public class Curso {
 	}
 
 	public void setCargaHoraria(int cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
+		this.cargaHoraria = this.disciplinas.stream().reduce(0, (subTotal, d) -> subTotal + d.getCredito(), Integer::sum);
 	}
 
 	public List<Aluno> getAlunos() {
@@ -48,6 +49,6 @@ public class Curso {
 	}
 
 	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+		this.alunos = new ArrayList<Aluno>();
 	};
 }

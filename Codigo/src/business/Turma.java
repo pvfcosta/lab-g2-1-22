@@ -9,13 +9,23 @@ public class Turma {
 	private Disciplina disciplina;
 	private List<Aluno> alunos;
 	
-	public void adicionarProfessor(Professor prof) {};
+	public void adicionarProfessor(Professor prof) {
+		this.getProfessores().add(prof);
+	};
 	
-	public Professor removerProfessor(Professor prof) {return prof;};
+	public Professor removerProfessor(Professor prof) {
+		int index = this.getProfessores().indexOf(prof);
+		return this.getProfessores().remove(index);
+		};
 	
-	public void adicionarAluno(Aluno aluno) {};
+	public void adicionarAluno(Aluno aluno) {
+		this.getAlunos().add(aluno);
+	};
 	
-	public Aluno removerAluno(Aluno aluno) {return aluno;}
+	public Aluno removerAluno(Aluno aluno) {
+		int index = this.getAlunos().indexOf(aluno);
+		return this.getAlunos().remove(index);
+		}
 
 	public int getCod_turma() {
 		return cod_turma;

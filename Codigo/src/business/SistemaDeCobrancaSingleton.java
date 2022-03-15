@@ -7,5 +7,6 @@ public class SistemaDeCobrancaSingleton {
 		return INSTANCIA;
 	}
 	
-	public void cobrarAluno() {};
+	public void cobrarAluno() {
+	};
 }
