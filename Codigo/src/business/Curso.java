@@ -8,6 +8,7 @@ public class Curso {
 	private int id;
 	private List<Disciplina> disciplinas;
 	private List<Aluno> alunos;
+	private List<Turma> turmas;
 	private int cargaHoraria;
 	
 	public void calcularCargaHoraria() {}
@@ -50,5 +51,18 @@ public class Curso {
 
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = new ArrayList<Aluno>();
+	}
+
+	public void addAluno(Aluno aluno) {
+		
+	}
+
+	public Object addDisciplina(Disciplina disciplina) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
 	};
 }

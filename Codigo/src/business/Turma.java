@@ -8,6 +8,7 @@ public class Turma {
 	private List<Professor> professores;
 	private Disciplina disciplina;
 	private List<Aluno> alunos;
+	private boolean matriculaAberta;
 	
 	public void adicionarProfessor(Professor prof) {
 		this.getProfessores().add(prof);
@@ -65,5 +66,13 @@ public class Turma {
 
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	public void abrirMatricula(boolean abrir) {
+		matriculaAberta = abrir;
+	}
+
+	public boolean isMatriculaAberta() {
+		return matriculaAberta;
 	};
 }
