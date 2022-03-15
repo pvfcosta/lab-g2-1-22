@@ -22,4 +22,14 @@ public class Disciplina {
 	public void setCredito(int credito) {
 		this.credito = credito;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Nome: ").append(this.nome).append("\n")
+		.append("Crédito: ").append(this.credito).append("\n");
+		
+		return sb.toString();
+		
+	}
 }

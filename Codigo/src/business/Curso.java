@@ -16,8 +16,6 @@ public class Curso {
 		alunos = new ArrayList<Aluno>();
 		turmas = new ArrayList<Turma>();
 	}
-	
-	public void calcularCargaHoraria() {}
 
 	public String getNome() {
 		return nome;
@@ -60,15 +58,23 @@ public class Curso {
 	}
 
 	public void addAluno(Aluno aluno) {
-		alunos.add(aluno);
+		this.alunos.add(aluno);
 	}
 
-	public Object addDisciplina(Disciplina disciplina) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addDisciplina(Disciplina disciplina) {
+		this.disciplinas.add(disciplina);
 	}
 
 	public List<Turma> getTurmas() {
 		return turmas;
 	};
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.nome).append("\n");
+		this.disciplinas.forEach(d -> sb.append(d.getNome()).append("\n"));
+		return sb.toString();
+		
+	}
 }

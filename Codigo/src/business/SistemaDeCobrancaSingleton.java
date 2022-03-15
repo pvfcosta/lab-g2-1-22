@@ -7,6 +7,7 @@ public class SistemaDeCobrancaSingleton {
 		return INSTANCIA;
 	}
 	
-	public void cobrarAluno() {
+	public String cobrarAluno() {
+		return "Pague sua mensalidade";
 	};
 }

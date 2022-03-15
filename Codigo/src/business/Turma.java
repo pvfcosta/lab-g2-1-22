@@ -2,6 +2,8 @@ package business;
 
 import java.util.List;
 
+import exception.SecretariaException;
+
 public class Turma {
 	private int cod_turma;
 	private String semestre;
@@ -19,8 +21,11 @@ public class Turma {
 		return this.getProfessores().remove(index);
 		};
 	
-	public void adicionarAluno(Aluno aluno) {
-		this.getAlunos().add(aluno);
+	public void adicionarAluno(Aluno aluno) throws SecretariaException{
+		if(alunos.size()<60)
+			this.getAlunos().add(aluno);
+		else
+			throw new SecretariaException ("A turma já atingiu o seu limite de alunos");
 	};
 	
 	public Aluno removerAluno(Aluno aluno) {
@@ -75,4 +80,15 @@ public class Turma {
 	public boolean isMatriculaAberta() {
 		return matriculaAberta;
 	};
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Semetre: ").append(this.semestre).append("\n")
+		.append("Disciplina: ").append(this.disciplina).append("\n")
+		.append("Professores: ");
+		this.professores.forEach(p -> sb.append(p.getNome()).append(" "));
+		
+		return sb.toString();
+	}
 }

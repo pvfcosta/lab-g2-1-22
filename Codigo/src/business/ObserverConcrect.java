@@ -8,6 +8,6 @@ public class ObserverConcrect extends Observer {
 
 	@Override 
 	public void update() {
-		System.out.println("Status de pagamento do aluno: " + subject.getEstado());
+		System.out.println("Status de matrícula do aluno: " + subject.getEstado());
 	};
 }
