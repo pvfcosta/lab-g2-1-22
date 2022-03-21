@@ -7,6 +7,14 @@ public class Disciplina {
 	private boolean ehObrigatoria;
 	private int periodo;
 
+	public Disciplina(int cod, String nome, int credito, boolean ehObrigatoria, int periodo){
+		setCod_disciplina(cod);
+		setNome(nome);
+		setCredito(credito);
+		setEhObrigatoria(ehObrigatoria);
+		setPeriodo(periodo);
+	}
+
 	public boolean isEhObrigatoria() {
 		return ehObrigatoria;
 	}
