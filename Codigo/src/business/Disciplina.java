@@ -4,6 +4,25 @@ public class Disciplina {
 	private int cod_disciplina;
 	private String nome;
 	private int credito;
+	private boolean ehObrigatoria;
+	private int periodo;
+
+	public boolean isEhObrigatoria() {
+		return ehObrigatoria;
+	}
+
+	public void setEhObrigatoria(boolean ehObrigatoria) {
+		this.ehObrigatoria = ehObrigatoria;
+	}
+
+	public int getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(int periodo) {
+		this.periodo = periodo;
+	}
+
 	public int getCod_disciplina() {
 		return cod_disciplina;
 	}
@@ -27,7 +46,7 @@ public class Disciplina {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Nome: ").append(this.nome).append("\n")
-		.append("Crédito: ").append(this.credito).append("\n");
+		.append("Crï¿½dito: ").append(this.credito).append("\n");
 		
 		return sb.toString();
 		
