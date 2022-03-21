@@ -64,6 +64,10 @@ public class Curso {
 	public void addDisciplina(Disciplina disciplina) {
 		this.disciplinas.add(disciplina);
 	}
+	
+	public void removeDisciplina(Disciplina disciplina) {
+		disciplinas.remove(disciplina);
+	}
 
 	public List<Turma> getTurmas() {
 		return turmas;

@@ -84,40 +84,15 @@ public class SecretariaSingleton {
 		
 		return curso;
 		};
-	
-	public void adicionarDisciplina(Disciplina disciplina, Curso curso) throws SecretariaException {
-		if (curso != null && disciplina != null) {
-			cursos.stream().filter(current_curso -> current_curso.equals(curso)).forEach(current_curso -> curso.addDisciplina(disciplina));
-		} else if (curso == null) {
-			throw new SecretariaException("Não foi possível adicionar a disciplina. (Curso nulo)");
-		} else {
-			throw new SecretariaException("Não foi possível adicionar a disciplina. (Disciplina nula)");
-		}
 		
-	};
-	
-	public Disciplina removerDisciplina(Disciplina disciplina, Curso curso) throws SecretariaException {
-		Iterator<Curso> iter = cursos.iterator();
-		boolean achou = false;
-		while(iter.hasNext()){
-			Curso p = iter.next();
-		    if(p.equals(curso)){
-		    	Iterator<Disciplina> iter_sec = curso.getDisciplinas().iterator();
-		    	while(iter_sec.hasNext()){
-		    		Disciplina d = iter_sec.next();
-		    		if(d.equals(disciplina)){
-		    			iter_sec.remove();
-		    			achou = true;
-		    		}
-		    	}   
-		    }
+	public void adicionarDisciplinaCurso(Disciplina disciplina, String nome) {
+		for(Curso c : cursos) {
+			if(c.getNome().equals(nome)) {
+				c.addDisciplina(disciplina);
+			}
 		}
-		if (!achou)
-			throw new SecretariaException("Não foi possível remover a disciplina. (Disciplina não adicionada)");
-		
-		return disciplina;
-		};
-
+	}
+	
 	public void manusearMatriculaGeral(Curso curso, boolean abrir) throws SecretariaException {
 		if (abrir == true)
 			cursos.stream().filter(current_curso -> current_curso.equals(curso)).forEach(current_curso -> curso.getTurmas().forEach(turma -> turma.abrirMatricula(abrir)));

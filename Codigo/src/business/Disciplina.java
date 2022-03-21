@@ -7,6 +7,14 @@ public class Disciplina {
 	private boolean ehObrigatoria;
 	private int periodo;
 
+	public Disciplina(int cod_disciplina, String nome, int credito, boolean ehObrigatoria, int periodo) {
+		this.cod_disciplina = cod_disciplina; 
+		this.nome = nome; 
+		this.credito = credito;
+		this.ehObrigatoria = ehObrigatoria;
+		this.periodo = periodo;
+	}
+	
 	public boolean isEhObrigatoria() {
 		return ehObrigatoria;
 	}
@@ -26,18 +34,23 @@ public class Disciplina {
 	public int getCod_disciplina() {
 		return cod_disciplina;
 	}
+	
 	public void setCod_disciplina(int cod_disciplina) {
 		this.cod_disciplina = cod_disciplina;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public int getCredito() {
 		return credito;
 	}
+	
 	public void setCredito(int credito) {
 		this.credito = credito;
 	}
