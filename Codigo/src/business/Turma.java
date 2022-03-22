@@ -107,7 +107,7 @@ public class Turma {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Semetre: ").append(this.semestre).append("\n")
-		.append("Disciplina: ").append(this.disciplina).append("\n")
+		.append("Disciplina -> ").append(this.disciplina).append("\n")
 		.append("Professores: ");
 		this.professores.forEach(p -> sb.append(p.getNome()).append(" "));
 		

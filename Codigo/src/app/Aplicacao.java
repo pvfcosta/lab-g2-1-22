@@ -43,10 +43,12 @@ public class Aplicacao {
 		System.out.println("6 - Contratar professor");
 		System.out.println("7 - Demitir professor");
 		System.out.println("8 - Criar turma");
-		System.out.println("9 - Gerar currículo");
+		System.out.println("9 - Abrir matrícula curso");
+		System.out.println("10 - Fechar matrícula curso");
+		System.out.println("11 - Gerar currículo");
 		System.out.println("0 - Sair");
 
-		opcao = escolheOpcao(0, 9, teclado, opcao);
+		opcao = escolheOpcao(0, 11, teclado, opcao);
 		return opcao;
 	}
 
@@ -230,20 +232,29 @@ public class Aplicacao {
 			}
 		}
 
-		System.out.print("Qual turma deseja se matricular? ");
+		boolean resultado = c.getTurmas().stream().anyMatch(f -> f.isMatriculaAberta());
 
-		c.getTurmas().stream().forEach(f -> System.out.println(" - " + f.getCod_turma()));
+		if (resultado) {
+			
+			System.out.print("Qual turma deseja se matricular? ");
 
-		int cod = Integer.parseInt(teclado.nextLine());
+			c.getTurmas().stream().forEach(f -> System.out.println(" - " + f.getCod_turma()));
 
-		for (Turma t : c.getTurmas()) {
-			if (cod == t.getCod_turma()) {
-				turma = t;
+			int cod = Integer.parseInt(teclado.nextLine());
+
+			for (Turma t : c.getTurmas()) {
+				if (cod == t.getCod_turma()) {
+					turma = t;
+				}
 			}
-		}
 
-		aluno.matricular(turma);
-		turma.adicionarAluno(aluno);
+			aluno.matricular(turma);
+			turma.adicionarAluno(aluno);
+		} else {
+			System.out.print("Não é possível realizar a matrícula. Turmas fechadas.");
+		}
+		
+
 	}
 
 	public static void removerMatricula(Scanner teclado, Curso c) throws SecretariaException {
@@ -456,11 +467,35 @@ public class Aplicacao {
 					criarTurma(teclado);
 					break;
 				case 9:
-					System.out.print("Qual curso deseja gerar o currículo? ");
-					String nomeCurso3 = teclado.nextLine();
-
+					System.out.print("Qual curso deseja abrir a matrícula? ");
+					String nomeCurso3 = teclado.nextLine();				
+					
 					for (Curso curso : secretaria.getCursos()) {
 						if (nomeCurso3.equals(curso.getNome())) {
+							c = curso;
+						}
+					}
+					
+					secretaria.manusearMatriculaGeral(c, true);					
+					break;
+				case 10:
+					System.out.print("Qual curso deseja fechar a matrícula? ");
+					String nomeCurso4 = teclado.nextLine();				
+					
+					for (Curso curso : secretaria.getCursos()) {
+						if (nomeCurso4.equals(curso.getNome())) {
+							c = curso;
+						}
+					}
+					
+					secretaria.manusearMatriculaGeral(c, false);	
+					break;
+				case 11:
+					System.out.print("Qual curso deseja gerar o currículo? ");
+					String nomeCurso5 = teclado.nextLine();
+
+					for (Curso curso : secretaria.getCursos()) {
+						if (nomeCurso5.equals(curso.getNome())) {
 							c = curso;
 						} else {
 							System.out.print("Curso não encontrado. Por favor, cadastre antes de gerar o currículo.");

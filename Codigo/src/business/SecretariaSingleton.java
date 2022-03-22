@@ -137,7 +137,7 @@ public class SecretariaSingleton {
 						if (cursos.get(i).getTurmas().get(j).getAlunos().size() >= 3)
 							cursos.get(i).getTurmas().get(j).abrirMatricula(false);
 						else {
-							cursos.get(i).getTurmas().remove(j);
+							//cursos.get(i).getTurmas().remove(j);
 							throw new SecretariaException("Não foi possível fechar a matricula para a turma "+ cursos.get(i).getTurmas().get(j).toString()+". Cancelando a turma... (Menos de 3 alunos matriculados)");
 						}
 					}
