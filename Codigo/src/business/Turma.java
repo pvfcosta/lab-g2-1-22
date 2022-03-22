@@ -1,6 +1,7 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import exception.SecretariaException;
@@ -38,10 +39,21 @@ public class Turma {
 			throw new SecretariaException ("A turma já atingiu o seu limite de alunos");
 	}
 	
-	public Aluno removerAluno(Aluno aluno) {
-		int index = this.getAlunos().indexOf(aluno);
-		return this.getAlunos().remove(index);
-		}
+	public Aluno removerAluno(Aluno aluno) throws SecretariaException {
+		Iterator<Aluno> iter = alunos.iterator();
+		boolean achou = false;
+		while(iter.hasNext()){
+			Aluno a = iter.next();
+		    if(a.equals(aluno)){
+		        iter.remove();
+		        achou = true;
+		    }
+		}	
+		if (!achou)
+			throw new SecretariaException("Não foi possível remover o aluno.");
+		
+		return aluno;
+	}
 
 	public int getCod_turma() {
 		return cod_turma;

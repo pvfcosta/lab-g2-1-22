@@ -59,7 +59,7 @@ public class Disciplina {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Nome: ").append(this.nome).append("\n")
-		.append("Cr�dito: ").append(this.credito).append("\n");
+		.append("Creditos: ").append(this.credito).append("\n");
 		
 		return sb.toString();
 		

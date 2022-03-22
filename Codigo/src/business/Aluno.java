@@ -2,8 +2,6 @@ package business;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import exception.SecretariaException;
 
 public class Aluno extends Usuario {
@@ -22,14 +20,14 @@ public class Aluno extends Usuario {
 	}
 	
 	public void matricular(Turma turma) throws SecretariaException {
-		if(turma.getDisciplina().isEhObrigatoria()) {
-			if(turmas.stream().filter(t -> t.getDisciplina().isEhObrigatoria()).count() <= 4 ) {
+		if (turma.getDisciplina().isEhObrigatoria()) {
+			if (turmas.stream().filter(t -> t.getDisciplina().isEhObrigatoria()).count() <= 4) {
 				turmas.add(turma);
-		} else {
-			throw new SecretariaException("Você só pode se matricular em 4 disciplinas obrigatórias");
+			} else {
+				throw new SecretariaException("Você só pode se matricular em 4 disciplinas obrigatórias");
 			}
-		} else if(!turma.getDisciplina().isEhObrigatoria()) {
-			if(turmas.stream().filter(t -> t.getDisciplina().isEhObrigatoria()).count() <= 2) {
+		} else {
+			if (turmas.stream().filter(t -> !t.getDisciplina().isEhObrigatoria()).count() <= 2) {
 				turmas.add(turma);
 			} else {
 				throw new SecretariaException("Você só pode se matricular em 2 disciplinas optativas");
@@ -37,8 +35,8 @@ public class Aluno extends Usuario {
 		}
 	}
 	
-	public Aluno cancelarMatricula(Turma turma) {
-		return turma.removerAluno(this);
+	public void cancelarMatricula(Turma turma) {
+		 turmas.remove(turma);
 	};
 	
 	public void visualizarMatricula() {
@@ -91,14 +89,15 @@ public class Aluno extends Usuario {
 		StringBuilder sb = new StringBuilder();
 			sb
 			        .append("\nInformações Aluno")
-					.append("Nome: ")
+					.append("\nNome: ")
 					.append(getNome())
 					.append("\nMatrícula: ")
 					.append(getMatricula())
 					.append("\nCurso: ")
-					.append(getCurso())
-					.append("\nDisciplinas: ")
-					.append(this.turmas.stream().map(Turma::getDisciplina).collect(Collectors.toList()));	
+					.append(getCurso().getNome())
+					.append("\nDisciplinas -> ");
+			this.turmas.forEach(p -> sb.append(p.getDisciplina()).append(" "));
+			sb.append("\n");
 		return sb.toString();
 	}
 }

@@ -85,13 +85,13 @@ public class SecretariaSingleton {
 		return curso;
 		}
 		
-	public void adicionarDisciplinaCurso(Disciplina disciplina, String nome) {
-		for(Curso c : cursos) {
-			if(c.getNome().equals(nome)) {
-				c.addDisciplina(disciplina);
+		public void adicionarDisciplinaCurso(Disciplina disciplina, Curso curso) throws SecretariaException {
+			if (curso != null) {
+				curso.addDisciplina(disciplina);
+			} else {
+				throw new SecretariaException("Não foi possível adicionar o curso. (Curso Nulo)");
 			}
 		}
-	}
 
 	
 	public void adicionarDisciplina(Disciplina disciplina, Curso curso) throws SecretariaException {

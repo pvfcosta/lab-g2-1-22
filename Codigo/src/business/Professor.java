@@ -2,7 +2,6 @@ package business;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Professor extends Usuario {
 	private List<Turma> turmas;
@@ -15,7 +14,11 @@ public class Professor extends Usuario {
 	public void gerarRelatorio() {
 		System.out.print(this);
 	}
-		
+	
+	public void addTurmas(Turma turmas) {
+		this.getTurmas().add(turmas);
+	}
+	
 	public List<Turma> getTurmas() {
 		return turmas;
 	}
@@ -29,12 +32,13 @@ public class Professor extends Usuario {
 		StringBuilder sb = new StringBuilder();
 			sb
 			        .append("\nInformações Professor")
-					.append("Nome: ")
+					.append("\nNome: ")
 					.append(getNome())
 					.append("\nEmail: ")
 					.append(getEmail())
-					.append("\nDisciplinas: ")
-					.append(turmas.stream().map(Turma::getDisciplina).collect(Collectors.toList()));			
+					.append("\nDisciplinas ministradas -> ").append("\n");
+			this.turmas.forEach(p -> sb.append(p.getDisciplina().getNome()).append(" "));
+			sb.append("\n");
 		return sb.toString();
 	}
 }
