@@ -1,18 +1,17 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import business.Aluno;
 import business.Curso;
 import business.Professor;
 import business.SecretariaSingleton;
 import exception.SecretariaException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SecretariaTest {
 	SecretariaSingleton sec;
@@ -24,7 +23,7 @@ class SecretariaTest {
 	void setUp() throws Exception {
 		sec = SecretariaSingleton.getInstancia();
 		erick = new Aluno(null, null, null, 0, null, 0, null);
-		eds = new Curso();
+		eds = new Curso("null",1);
 		prof = new Professor(null, null, null, 0, null);
 		sec.adicionarCurso(eds);
 	}

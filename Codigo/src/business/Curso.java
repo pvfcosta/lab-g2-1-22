@@ -11,10 +11,12 @@ public class Curso {
 	private List<Turma> turmas;
 	private int cargaHoraria;
 	
-	public Curso() {
-		disciplinas = new ArrayList<Disciplina>();
-		alunos = new ArrayList<Aluno>();
-		turmas = new ArrayList<Turma>();
+	public Curso(String nome, int id) {
+		setNome(nome);
+		setId(id);
+		disciplinas = new ArrayList<>();
+		alunos = new ArrayList<>();
+		turmas = new ArrayList<>();
 	}
 
 	public String getNome() {
@@ -38,14 +40,14 @@ public class Curso {
 	}
 
 	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = new ArrayList<Disciplina>();
+		this.disciplinas = disciplinas;
 	}
 
 	public int getCargaHoraria() {
 		return cargaHoraria;
 	}
 
-	public void setCargaHoraria(int cargaHoraria) {
+	public void setCargaHoraria() {
 		this.cargaHoraria = this.disciplinas.stream().reduce(0, (subTotal, d) -> subTotal + d.getCredito(), Integer::sum);
 	}
 
@@ -54,7 +56,7 @@ public class Curso {
 	}
 
 	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = new ArrayList<Aluno>();
+		this.alunos = alunos;
 	}
 
 	public void addAluno(Aluno aluno) {
@@ -63,6 +65,23 @@ public class Curso {
 
 	public void addDisciplina(Disciplina disciplina) {
 		this.disciplinas.add(disciplina);
+		setCargaHoraria();
+	}
+	public void addTurma(Turma turma){
+		this.turmas.add(turma);
+	}
+	public boolean removerAluno(Aluno aluno){
+		return this.alunos.remove(aluno);
+	}
+
+	public boolean removerDisciplina(Disciplina disciplina){
+		boolean removeu = this.disciplinas.remove(disciplina);
+		setCargaHoraria();
+		return removeu;
+
+	}
+	public boolean removerTurma(Turma turma){
+		return this.turmas.remove(turma);
 	}
 	
 	public void removeDisciplina(Disciplina disciplina) {

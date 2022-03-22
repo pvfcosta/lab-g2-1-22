@@ -97,9 +97,7 @@ public class Aplicacao {
 		teclado.nextLine();
 	}
 	
-	public static Aluno matricular(Scanner teclado, SecretariaSingleton s) throws SecretariaException {
-		Aluno a;
-		Curso c = null;
+	public static Aluno matricular(Scanner teclado) throws SecretariaException {
 
 		System.out.println("Insira o nome do aluno:");
 		String nome = teclado.nextLine();
@@ -122,19 +120,19 @@ public class Aplicacao {
 		System.out.println("Insira o curso do aluno:");
 		String curso = teclado.nextLine();
 
-		if (SecretariaSingleton.getInstancia().getCursos().contains(curso)) {
-			c.setNome(curso);
+		Curso c = (Curso) SecretariaSingleton.getInstancia().getCursos().stream().filter(cur -> cur.getNome().equals(curso));
+		Aluno a = new Aluno(nome, email, senha, cod, cpf, matricula, c);
+
+		if (c == null) {
+			SecretariaSingleton.getInstancia().matricularAluno(a, c);
 		} else {
 			System.out.print("Curso não encontrado. Por favor, cadastre antes de matricular o aluno.");
 		}
 
-		a = new Aluno(nome, email, senha, cod, cpf, matricula, c);
-
-		SecretariaSingleton.getInstancia().matricularAluno(a, c);
 		return a;
 	}
 	
-	public static Professor cadastrarProfessor(Scanner teclado) throws SecretariaException {			
+	public static Professor cadastrarProfessor(Scanner teclado) {
 		Professor p; 
 		
 		System.out.println("Insira o nome do professor:");
@@ -158,7 +156,7 @@ public class Aplicacao {
 	}
 	
 	
-	public static void removerProfessor(Scanner teclado, SecretariaSingleton s) throws SecretariaException {		
+	public static void removerProfessor(Scanner teclado) throws SecretariaException {
 		System.out.println("\nQual professor deseja remover? ");
 		
 		int i = 1;
@@ -179,23 +177,17 @@ public class Aplicacao {
 		teclado.nextLine();
 	}
 	
-	public static Curso adicionarCurso(Scanner teclado) {		
-		Curso c = new Curso();
+	public static Curso adicionarCurso(Scanner teclado) {
 		
 		System.out.print("Nome: ");
 		String nome = teclado.nextLine();
 		System.out.println("Id:");
 		int id = Integer.parseInt(teclado.nextLine());
-		System.out.println("Carga horário");
-		int carga = Integer.parseInt(teclado.nextLine());
-		c.setNome(nome);
-		c.setCargaHoraria(carga);
-		c.setId(id);
-		
-		return c; 
+
+		return new Curso(nome,id);
 	}
 	
-	public static void removerCurso(Scanner teclado, SecretariaSingleton s) throws SecretariaException {		
+	public static void removerCurso(Scanner teclado) throws SecretariaException {
 		System.out.println("\nQual curso deseja remover? ");
 		
 		int i = 1;
@@ -243,7 +235,7 @@ public class Aplicacao {
 		aluno.matricular(turma);	
 	}
 	
-	public static void removerMatricula(Scanner teclado, Curso c) throws SecretariaException {
+	public static void removerMatricula(Scanner teclado, Curso c) {
 		Aluno aluno = null;
 
 		System.out.print("Digite sua matrícula");
@@ -266,7 +258,6 @@ public class Aplicacao {
 	}
 	  
 	public static Disciplina adicionarDisciplina(Scanner teclado){
-		Disciplina d = null;
 		
 		System.out.print("Nome: ");
 		String nome = teclado.nextLine();
@@ -278,13 +269,11 @@ public class Aplicacao {
 		int periodo = Integer.parseInt(teclado.nextLine());
 		System.out.println("É obrigatória? true/false");
 		boolean obrigatoria = teclado.nextBoolean();
-
-		d = new Disciplina(cod, nome, credito, obrigatoria, periodo);
 		
-		return d; 
+		return new Disciplina(cod, nome, credito, obrigatoria, periodo);
 	}
 	
-	public static void removerDisciplina(Scanner teclado, Curso c) throws SecretariaException {		
+	public static void removerDisciplina(Scanner teclado, Curso c) {
 
 		System.out.println("\nQual disciplina deseja remover? ");
 		
@@ -327,7 +316,7 @@ public class Aplicacao {
 				op2 = menuSecretaria(teclado);
 				switch (op2) {
 				case 1:
-					matricular(teclado, secretaria);			
+					matricular(teclado);
 					pausa(teclado);
 					break;
 				case 2: 
@@ -336,7 +325,7 @@ public class Aplicacao {
 					pausa(teclado);
 					break;
 				case 3: 
-					removerProfessor(teclado, secretaria);
+					removerProfessor(teclado);
 					pausa(teclado);
 					break;
 				case 4: 
@@ -345,7 +334,7 @@ public class Aplicacao {
 					pausa(teclado);
 					break;
 				case 5: 
-					removerCurso(teclado, secretaria);
+					removerCurso(teclado);
 					pausa(teclado);
 					break;
 				case 6: 

@@ -7,14 +7,14 @@ public class Disciplina {
 	private boolean ehObrigatoria;
 	private int periodo;
 
-	public Disciplina(int cod_disciplina, String nome, int credito, boolean ehObrigatoria, int periodo) {
-		this.cod_disciplina = cod_disciplina; 
-		this.nome = nome; 
-		this.credito = credito;
-		this.ehObrigatoria = ehObrigatoria;
-		this.periodo = periodo;
+	public Disciplina(int cod, String nome, int credito, boolean ehObrigatoria, int periodo){
+		setCod_disciplina(cod);
+		setNome(nome);
+		setCredito(credito);
+		setEhObrigatoria(ehObrigatoria);
+		setPeriodo(periodo);
 	}
-	
+
 	public boolean isEhObrigatoria() {
 		return ehObrigatoria;
 	}

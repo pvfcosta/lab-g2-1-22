@@ -1,5 +1,6 @@
 package business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import exception.SecretariaException;
@@ -11,22 +12,31 @@ public class Turma {
 	private Disciplina disciplina;
 	private List<Aluno> alunos;
 	private boolean matriculaAberta;
+
+	public Turma (int cod, String semestre, Disciplina disciplina){
+		setCod_turma(cod);
+		setSemestre(semestre);
+		setDisciplina(disciplina);
+		this.professores = new ArrayList<>();
+		this.alunos = new ArrayList<>();
+		abrirMatricula(false);
+	}
 	
 	public void adicionarProfessor(Professor prof) {
 		this.getProfessores().add(prof);
-	};
+	}
 	
 	public Professor removerProfessor(Professor prof) {
 		int index = this.getProfessores().indexOf(prof);
 		return this.getProfessores().remove(index);
-		};
+		}
 	
 	public void adicionarAluno(Aluno aluno) throws SecretariaException{
-		if(alunos.size()<60)
+		if(alunos.size()<60) {
 			this.getAlunos().add(aluno);
-		else
+		} else
 			throw new SecretariaException ("A turma já atingiu o seu limite de alunos");
-	};
+	}
 	
 	public Aluno removerAluno(Aluno aluno) {
 		int index = this.getAlunos().indexOf(aluno);
@@ -79,7 +89,7 @@ public class Turma {
 
 	public boolean isMatriculaAberta() {
 		return matriculaAberta;
-	};
+	}
 	
 	@Override
 	public String toString() {
